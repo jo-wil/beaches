@@ -1,0 +1,38 @@
+﻿@model MvcJoey.Models.JoeyViewModel
+
+@{
+    ViewData["Title"] = "Joeys Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4"> Beaches </h1>
+    <form asp-action="Update">
+      <button class="btn btn-primary" type="submit"> Save Changes </button> 
+      <table class="table">
+          <tr>
+              <th> Id </th>
+              <th> Name </th>
+              <th> Status </th>
+          </tr>
+          @for (int i = 0; i < Model.Beaches.Count; i++)
+          {
+              <tr>
+                  <td>
+                      <input type="hidden" asp-for="@Model.Beaches[i].Id"/>
+                      @Model.Beaches[i].Id
+                  </td>
+                  <td>
+                      <input type="hidden" asp-for="@Model.Beaches[i].Name"/>
+                      @Model.Beaches[i].Name
+                  </td>
+                  <td>
+                      <select class="form-control"
+                              asp-for="@Model.Beaches[i].Status" 
+                              asp-items="@(new SelectList(Model.BeachStatuses))">
+                      </select>
+                  </td>
+              </tr>
+          }
+      </table>
+    </form>
+</div>
